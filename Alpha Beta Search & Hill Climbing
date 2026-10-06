@@ -1,0 +1,163 @@
+3(a) Alpha Beta Search 
+
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [4, 3],
+    'E': [6, 2],
+    'F': [2, 1],
+    'G': [9, 5]
+}
+
+
+def minimax_alpha_beta(node, depth, alpha, beta, max_player):
+
+    # Base case: if we are at a leaf node, return the score.
+    if depth == 0:
+        if node in tree:
+            # For this simple tree, the children are the scores.
+            return tree[node][0] if max_player else tree[node][0]
+        else:
+            return node
+
+    # Recursive case:
+
+    # Maximizing player's turn (MAX)
+    if max_player:
+        value = float('-inf')
+
+        for child in tree[node]:
+
+            # Recursively call the function for the child node.
+            value = max(
+                value,
+                minimax_alpha_beta(
+                    child,
+                    depth - 1,
+                    alpha,
+                    beta,
+                    False
+                )
+            )
+
+            alpha = max(alpha, value)
+
+            if alpha >= beta:
+                print(f"Pruning branch at node {node}")
+                break
+
+        return value
+
+    # Minimizing player's turn (MIN)
+    else:
+        value = float('inf')
+
+        for child in tree[node]:
+
+            # Recursively call the function for the child node.
+            value = min(
+                value,
+                minimax_alpha_beta(
+                    child,
+                    depth - 1,
+                    alpha,
+                    beta,
+                    True
+                )
+            )
+
+            beta = min(beta, value)
+
+            if beta <= alpha:
+                print(f"Pruning branch at node {node}")
+                break
+
+        return value
+
+
+# Start the search from the root node 'A'
+best_score = minimax_alpha_beta(
+    'A',
+    2,
+    float('-inf'),
+    float('inf'),
+    True
+)
+
+print(f"The best score is: {best_score}")
+
+3(b) Hill Climbing
+
+import random
+
+distance = [
+    [0, 2, 9, 10],
+    [2, 0, 6, 4],
+    [9, 6, 0, 3],
+    [10, 4, 3, 0]
+]
+
+
+def get_cost(tour):
+    cost = 0
+
+    for i in range(len(tour)):
+        cost += distance[tour[i - 1]][tour[i]]
+        print("Cost of tour:", cost)
+
+    return cost
+
+
+def get_neighbour(tour):
+    a, b = random.sample(range(len(tour)), 2)
+    tour[a], tour[b] = tour[b], tour[a]
+    return tour
+
+
+def hill_climb():
+
+    current = [0, 1, 2, 3]
+    random.shuffle(current)
+
+    current_cost = get_cost(current)
+
+    print("Starting tour:", current, "Cost:", current_cost)
+
+    for i in range(10):
+
+        neighbor = current[:]
+
+        print("Current neighbor:", neighbor)
+
+        neighbor = get_neighbour(neighbor)
+
+        print("Connected neighbor:", neighbor)
+
+        # Calculate the cost of the neighbour
+        neighbour_cost = get_cost(neighbor)
+
+        if neighbour_cost < current_cost:
+
+            current = neighbor
+
+            print("Current neighbor:", current)
+
+            current_cost = neighbour_cost
+
+            print("Current Cost:", current_cost)
+
+            print(
+                "Better tour found:",
+                current,
+                "Cost:",
+                current_cost
+            )
+
+    return current, current_cost
+
+
+best_tour, best_cost = hill_climb()
+
+print("\nBest tour:", best_tour)
+print("Best cost:", best_cost)
