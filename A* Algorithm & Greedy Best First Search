@@ -1,7 +1,5 @@
 
 A* Algorithm:  
-Greedy Best First Search:
-
 graph = {
     "a": ({"b": 1, "d": 2, "e": 3}, 4),
     "b": ({"c": 2, "d": 1}, 3),
@@ -28,13 +26,11 @@ def a_star(graph, source, dest):
 
     while open_list:
 
-        # Select node with minimum f = g + h
+        # Select node with minimum f(n) = g(n) + h(n)
         current = min(
             open_list,
             key=lambda x: open_list[x][0] + open_list[x][1]
         )
-
-        g = open_list[current][0]
 
         del open_list[current]
 
@@ -88,6 +84,7 @@ if path:
 else:
     print("Path not found.")
 
+
 ##############################################     4(b) Greedy Best First Search:
 
 graph = {
@@ -96,15 +93,14 @@ graph = {
     "c": ({"f": 3}, 2),
     "d": ({"f": 2}, 3),
     "e": ({"d": 3, "f": 4}, 2),
-    "f": ({}, 0),
+    "f": ({}, 0)
 }
 
 
 def greedy_search_rec(graph, prev, dst, path, q):
 
-    # n: (h(n))
     print(
-        "Connected nodes of current nodes",
+        "\nConnected nodes of current node",
         prev,
         "with h(n) values:"
     )
@@ -112,19 +108,16 @@ def greedy_search_rec(graph, prev, dst, path, q):
     for n in graph[prev][0]:
 
         if n not in path:
-
             q[n] = graph[n][1]
-
-            print(n, "->", q[n])
+            print(n, "-> h(n) =", q[n])
 
     while q:
 
         mn = min(q, key=q.get)
 
-        print(
-            "Taking minimum h(n) vertex:",
-            mn
-        )
+        print("Taking minimum h(n) vertex:", mn)
+
+        del q[mn]
 
         if dst == mn:
             return path + [dst]
@@ -143,8 +136,9 @@ def greedy_search_rec(graph, prev, dst, path, q):
     return []
 
 
-source = input("Enter source vertex: ")
-dest = input("Enter destination vertex: ")
+# Driver Code
+source = input("Enter source vertex: ").lower()
+dest = input("Enter destination vertex: ").lower()
 
 path = greedy_search_rec(
     graph,
@@ -155,6 +149,8 @@ path = greedy_search_rec(
 )
 
 if path:
-    print(path)
+    print("\nGreedy Best First Search Path:")
+    print(" -> ".join(path))
 else:
+    print("\nPath not found.")
     print("Path not found!")
