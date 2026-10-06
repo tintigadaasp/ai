@@ -124,5 +124,7 @@ print("\nShortest Path of Graph is:")
 
 print(bfs_shortest_path(graph, 'A', 'E'))
 
+output:
+
 Your notebook shows the BFS practical together with graph traversal, all paths and shortest path, with the shortest path shown as:
 ['A', 'B', 'C', 'E']
