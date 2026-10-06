@@ -1,0 +1,251 @@
+9(a) Associative Law:
+
+# Associative Law Verification using if-else
+
+print("ASSOCIATIVE LAW VERIFICATION")
+
+
+# Boolean Inputs
+print("\nEnter Boolean Values (0 = False, 1 = True)")
+
+A = bool(int(input("Enter A: ")))
+B = bool(int(input("Enter B: ")))
+C = bool(int(input("Enter C: ")))
+
+
+# Boolean AND
+lhs = (A and B) and C
+rhs = A and (B and C)
+
+
+print("\n----- Boolean AND -----")
+
+print(
+    "LHS = (A AND B) AND C =",
+    lhs
+)
+
+print(
+    "RHS = A AND (B AND C) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Associative Law is Verified.")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Associative Law is Not Verified.")
+
+
+# Boolean OR
+lhs = (A or B) or C
+rhs = A or (B or C)
+
+
+print("\n----- Boolean OR -----")
+
+print(
+    "LHS = (A OR B) OR C =",
+    lhs
+)
+
+print(
+    "RHS = A OR (B OR C) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Associative Law is Verified.")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Associative Law is Not Verified.")
+
+
+# Arithmetic Inputs
+print("\nEnter Three Numbers")
+
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+c = int(input("Enter c: "))
+
+
+# Arithmetic Addition
+lhs = (a + b) + c
+rhs = a + (b + c)
+
+
+print("\n----- Arithmetic Addition -----")
+
+print(
+    "LHS = (a + b) + c =",
+    lhs
+)
+
+print(
+    "RHS = a + (b + c) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Associative Law is Verified.")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Associative Law is Not Verified.")
+
+
+# Arithmetic Multiplication
+lhs = (a * b) * c
+rhs = a * (b * c)
+
+
+print("\n----- Arithmetic Multiplication -----")
+
+print(
+    "LHS = (a * b) * c =",
+    lhs
+)
+
+print(
+    "RHS = a * (b * c) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Associative Law is Verified.")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Associative Law is Not Verified.")
+
+9(b) Distributive Law:
+
+# Program to Verify Distributive Law
+
+print("=======================================")
+print("      DISTRIBUTIVE LAW VERIFICATION")
+print("=======================================")
+
+
+# ---------- Boolean Inputs ----------
+print("\nEnter Boolean Values (0 = False, 1 = True)")
+
+A = bool(int(input("Enter A: ")))
+B = bool(int(input("Enter B: ")))
+C = bool(int(input("Enter C: ")))
+
+
+# ---------- Boolean AND over OR ----------
+print("\n----- Boolean AND over OR -----")
+
+lhs = A and (B or C)
+rhs = (A and B) or (A and C)
+
+
+print(
+    "LHS = A AND (B OR C) =",
+    lhs
+)
+
+print(
+    "RHS = (A AND B) OR (A AND C) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Distributive Law Verified")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Distributive Law Not Verified")
+
+
+# ---------- Boolean OR over AND ----------
+print("\n----- Boolean OR over AND -----")
+
+lhs = A or (B and C)
+rhs = (A or B) and (A or C)
+
+
+print(
+    "LHS = A OR (B AND C) =",
+    lhs
+)
+
+print(
+    "RHS = (A OR B) AND (A OR C) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Distributive Law Verified")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Distributive Law Not Verified")
+
+
+# ---------- Arithmetic Inputs ----------
+print("\nEnter Arithmetic Values")
+
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+c = int(input("Enter c: "))
+
+
+# ---------- Arithmetic Distributive Law ----------
+print("\n----- Arithmetic Distributive Law -----")
+
+lhs = a * (b + c)
+rhs = (a * b) + (a * c)
+
+
+print(
+    "LHS = a * (b + c) =",
+    lhs
+)
+
+print(
+    "RHS = (a * b) + (a * c) =",
+    rhs
+)
+
+
+if lhs == rhs:
+
+    print("Result: LHS = RHS")
+    print("Distributive Law Verified")
+
+else:
+
+    print("Result: LHS ≠ RHS")
+    print("Distributive Law Not Verified")
+
+
+print("\nProgram Completed Successfully.")
