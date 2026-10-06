@@ -1,0 +1,158 @@
+Greedy Best First Search:
+
+graph = {
+    "a": ({"b": 1, "d": 2, "e": 3}, 4),
+    "b": ({"c": 2, "d": 1}, 3),
+    "c": ({"f": 3}, 2),
+    "d": ({"f": 2}, 3),
+    "e": ({"d": 3, "f": 4}, 2),
+    "f": ({}, 0)
+}
+
+
+def a_star(graph, source, dest):
+
+    open_list = {
+        source: (0, graph[source][1])
+    }
+
+    path = {
+        source: None
+    }
+
+    cost = {
+        source: 0
+    }
+
+    while open_list:
+
+        # Select node with minimum f = g + h
+        current = min(
+            open_list,
+            key=lambda x: open_list[x][0] + open_list[x][1]
+        )
+
+        g = open_list[current][0]
+
+        del open_list[current]
+
+        if current == dest:
+
+            result = []
+
+            while current is not None:
+                result.append(current)
+                current = path[current]
+
+            result.reverse()
+
+            return result, cost[dest]
+
+        print("\nConnected nodes of", current)
+
+        for neighbor, edge_cost in graph[current][0].items():
+
+            new_cost = cost[current] + edge_cost
+
+            if neighbor not in cost or new_cost < cost[neighbor]:
+
+                cost[neighbor] = new_cost
+                path[neighbor] = current
+
+                open_list[neighbor] = (
+                    new_cost,
+                    graph[neighbor][1]
+                )
+
+                print(
+                    neighbor,
+                    "g(n) =", new_cost,
+                    "h(n) =", graph[neighbor][1],
+                    "f(n) =", new_cost + graph[neighbor][1]
+                )
+
+    return None, None
+
+
+# Driver Code
+source = input("Enter source vertex: ").lower()
+dest = input("Enter destination vertex: ").lower()
+
+path, total_cost = a_star(graph, source, dest)
+
+if path:
+    print("\nShortest Path:", " -> ".join(path))
+    print("Total Cost:", total_cost)
+else:
+    print("Path not found.")
+
+4(b) Greedy Best First Search:
+
+graph = {
+    "a": ({"b": 1, "d": 2, "e": 3}, 4),
+    "b": ({"c": 2, "d": 1}, 3),
+    "c": ({"f": 3}, 2),
+    "d": ({"f": 2}, 3),
+    "e": ({"d": 3, "f": 4}, 2),
+    "f": ({}, 0),
+}
+
+
+def greedy_search_rec(graph, prev, dst, path, q):
+
+    # n: (h(n))
+    print(
+        "Connected nodes of current nodes",
+        prev,
+        "with h(n) values:"
+    )
+
+    for n in graph[prev][0]:
+
+        if n not in path:
+
+            q[n] = graph[n][1]
+
+            print(n, "->", q[n])
+
+    while q:
+
+        mn = min(q, key=q.get)
+
+        print(
+            "Taking minimum h(n) vertex:",
+            mn
+        )
+
+        if dst == mn:
+            return path + [dst]
+
+        new_path = greedy_search_rec(
+            graph,
+            mn,
+            dst,
+            path + [mn],
+            q
+        )
+
+        if new_path:
+            return new_path
+
+    return []
+
+
+source = input("Enter source vertex: ")
+dest = input("Enter destination vertex: ")
+
+path = greedy_search_rec(
+    graph,
+    source,
+    dest,
+    [source],
+    {}
+)
+
+if path:
+    print(path)
+else:
+    print("Path not found!")
