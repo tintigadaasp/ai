@@ -1,3 +1,5 @@
+
+A* Algorithm:  
 Greedy Best First Search:
 
 graph = {
@@ -86,7 +88,7 @@ if path:
 else:
     print("Path not found.")
 
-4(b) Greedy Best First Search:
+##############################################     4(b) Greedy Best First Search:
 
 graph = {
     "a": ({"b": 1, "d": 2, "e": 3}, 4),
