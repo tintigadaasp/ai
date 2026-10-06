@@ -1,0 +1,118 @@
+10(a) Predicate Examples
+1. Batman → Cricketer → Sportsman → Famous Person:
+
+batman(sachin).
+batman(virat).
+batman(rahul).
+batman(dhoni).
+
+cricketer(X) :- batman(X).
+
+sportsman(X) :- cricketer(X).
+
+famous(X) :- sportsman(X).
+
+2. Teacher → Employee → Human → Living Being:
+
+teacher(Anita).
+teacher(Raj).
+teacher(Meera).
+teacher(Rahul).
+
+employee(X) :- teacher(X).
+
+human(X) :- employee(X).
+
+livingbeing(X) :- human(X).
+
+3. Student → Learner → Knowledge Seeker → Future Professional:
+
+student(Riya).
+student(Amit).
+student(Sam).
+student(Neha).
+
+learner(X) :- student(X).
+
+knowledgeseeker(X) :- learner(X).
+
+futureprofessional(X) :- knowledgeseeker(X).
+
+4. Dog → Animal → Pet → Living Being
+dog(Tommy).
+dog(Bruno).
+dog(Lucky).
+dog(Rocky).
+
+animal(X) :- dog(X).
+
+pet(X) :- animal(X).
+
+livingbeing(X) :- pet(X).
+
+5. Book → Knowledge Source → Educational Material → Valuable Resource
+book(Physics).
+book(Maths).
+book(History).
+book(Computers).
+
+knowledgesource(X) :- book(X).
+
+educationalmaterial(X) :- knowledgesource(X).
+
+valuableresource(X) :- educationalmaterial(X).
+
+
+10(b) Family Tree / Given Predicates:
+
+Family Facts:
+
+male(john).
+male(mike).
+male(david).
+
+female(lisa).
+female(susan).
+female(anna).
+
+parent(john, mike).
+parent(john, lisa).
+
+parent(susan, mike).
+parent(susan, lisa).
+
+parent(mike, david).
+parent(anna, david).
+
+Rules::::::
+
+father(F, C) :-
+    male(F),
+    parent(F, C).
+
+mother(M, C) :-
+    female(M),
+    parent(M, C).
+
+grandfather(GF, C) :-
+    male(GF),
+    parent(GF, P),
+    parent(P, C).
+
+grandmother(GM, C) :-
+    female(GM),
+    parent(GM, P),
+    parent(P, C).
+
+sibling(X, Y) :-
+    parent(P, X),
+    parent(P, Y),
+    X \= Y.
+
+
+
+
+
+
+
+
