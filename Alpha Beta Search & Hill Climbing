@@ -154,7 +154,7 @@ def hill_climb():
                 current_cost
             )
 
-    return current, current_cost
+    return current, current_cost 
 
 
 best_tour, best_cost = hill_climb()
