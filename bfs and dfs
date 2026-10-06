@@ -1,0 +1,128 @@
+PRACTICAL 1
+1(a) Depth First Search — DFS 
+
+import collections
+
+def dfs(gr, n, seen, d):
+    if n in seen:
+        return seen
+
+    seen.append(n)
+
+    for i in gr[n]:
+        if i == d:
+            seen.append(i)
+            break
+
+        if i not in seen:
+            dfs(gr, i, seen, d)
+
+    return seen
+
+
+graph = {
+    'M': ['R', 'Q', 'N'],
+    'N': ['M', 'Q', 'O'],
+    'O': ['N', 'P'],
+    'R': ['M'],
+    'Q': ['M', 'N', 'P'],
+    'P': ['O', 'Q']
+}
+
+print(dfs(graph, 'M', [], 'P'))
+
+Output:
+['M', 'R', 'Q', 'N', 'O', 'P']
+
+
+1(b) Breadth First Search — BFS
+import collections
+
+def bfs(graph, root):
+    seen = set([root])
+    queue = collections.deque([root])
+
+    while queue:
+        vertex = queue.popleft()
+        visit(vertex)
+
+        for node in graph[vertex]:
+            if node not in seen:
+                seen.add(node)
+                queue.append(node)
+
+
+def all_path(st, end, gr):
+    todo = [(st, [st])]
+
+    while len(todo):
+        node, path = todo.pop(0)
+
+        for next_node in gr[node]:
+            if next_node in path:
+                continue
+
+            print("Ideal Solution")
+
+            if next_node == end:
+                yield path + [next_node]
+            else:
+                todo.append((next_node, path + [next_node]))
+
+
+def visit(n):
+    print(n)
+
+
+def bfs_shortest_path(graph, source, destination):
+    checked = set()
+    queue = [source]
+
+    if source == destination:
+        return "Source is destination"
+
+    while queue:
+        path = queue.pop(0)
+        node = path[-1]
+
+        if node not in checked:
+            neighbours = graph[node]
+
+            for neighbour in neighbours:
+                new_path = list(path)
+                new_path.append(neighbour)
+
+                if neighbour == destination:
+                    return new_path
+
+                checked.add(node)
+                queue.append(new_path)
+
+    return "Path does not exist."
+
+
+graph = {
+    'A': ['B', 'D'],
+    'B': ['C', 'F'],
+    'C': ['E', 'G'],
+    'D': ['E', 'H'],
+    'E': ['B', 'F'],
+    'F': ['A'],
+    'G': ['F'],
+    'H': ['A']
+}
+
+print("Graph Traversed:")
+
+bfs(graph, 'A')
+
+print("\nAll paths are:")
+
+print([p for p in all_path('A', 'E', graph)])
+
+print("\nShortest Path of Graph is:")
+
+print(bfs_shortest_path(graph, 'A', 'E'))
+
+Your notebook shows the BFS practical together with graph traversal, all paths and shortest path, with the shortest path shown as:
+['A', 'B', 'C', 'E']
