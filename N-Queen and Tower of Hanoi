@@ -1,0 +1,87 @@
+2(a) N-Queen Problem
+
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
+    print()
+
+
+def check_q(board, row, col, n):
+    # Check column
+    for i in range(row):
+        if board[i][col] == 'Q':
+            return False
+
+    # Check upper-left diagonal
+    i, j = row, col
+    while i >= 0 and j >= 0:
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j -= 1
+
+    # Check upper-right diagonal
+    i, j = row, col
+    while i >= 0 and j < n:
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j += 1
+
+    return True
+
+
+def solve_queens(board, row, n):
+    if row == n:
+        print_board(board)
+        return True
+
+    for col in range(n):
+        if check_q(board, row, col, n):
+            board[row][col] = 'Q'
+
+            if solve_queens(board, row + 1, n):
+                return True
+
+            board[row][col] = '.'
+
+    return False
+
+
+def queens():
+    n = int(input("Enter value of N: "))
+    board = []
+
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append('.')
+        board.append(row)
+
+    if not solve_queens(board, 0, n):
+        print("No Solution Found")
+
+
+queens()
+
+2(b) Tower of Hanoi
+
+def tower_of_hanoi(n, source, auxiliary, destination):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {destination}")
+        return
+
+    # Move n-1 disks from source to auxiliary
+    tower_of_hanoi(n - 1, source, destination, auxiliary)
+
+    # Move the largest disk from source to destination
+    print(f"Move disk {n} from {source} to {destination}")
+
+    # Move n-1 disks from auxiliary to destination
+    tower_of_hanoi(n - 1, auxiliary, source, destination)
+
+
+# Main program
+n = int(input("Enter number of disks: "))
+
+tower_of_hanoi(n, 'A', 'B', 'C')
